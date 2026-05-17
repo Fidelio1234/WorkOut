@@ -59,7 +59,25 @@ export default function App() {
       return () => clearTimeout(t)
     }
   }, [phase])
+  useEffect(() => {
+    let wakeLock = null
+    const requestWakeLock = async () => {
+      try { wakeLock = await navigator.wakeLock.request('screen') } catch (e) {}
+    }
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') requestWakeLock()
+    }
+    if (user) {
+      requestWakeLock()
+      document.addEventListener('visibilitychange', handleVisibility)
+    }
+    return () => {
+      wakeLock?.release()
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+  }, [user])
 
+  
   // Loading Firebase auth state
   if (user === undefined) {
     return (
@@ -75,6 +93,12 @@ export default function App() {
 
   // Not logged in
   if (!user) return <LoginPage />
+
+
+
+
+
+  
 
   // Logged in
   return (
