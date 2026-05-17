@@ -94,7 +94,7 @@ export function useWorkout() {
       if (t === 0) {
         beep(1000, 0.2, 'sine', 0.4)
         const firstName = snap?.exerciseNames?.[0]
-        speak(firstName ? `Via! ${firstName}` : 'Via!')
+        speak(firstName ? `Via! ${firstName}. ${snap.exDur} secondi` : `Via! ${snap.exDur} secondi`)
         s.phase = PHASES.EXERCISE
         s.phaseTime = snap.exDur
       }
@@ -119,7 +119,7 @@ export function useWorkout() {
         }
 
         if (lastEx) {
-          beep(300, 0.2, 'triangle', 0.4); speak('Stop! riposo tra serie.')
+          beep(300, 0.2, 'triangle', 0.4); speak(`Stop! Riposo serie. ${snap.seriesRestDur} secondi`)
           s.totalRem = Math.max(0, s.totalRem - 1)
           s.currentSet++
           s.currentEx = 1
@@ -131,7 +131,7 @@ export function useWorkout() {
             s.phaseTime = 4
           }
         } else {
-          beep(300, 0.2, 'triangle', 0.4); speak('Stop! Recupero.')
+          beep(300, 0.2, 'triangle', 0.4); speak(`Stop! Recupero. ${snap.restDur} secondi`)
           s.totalRem = Math.max(0, s.totalRem - 1)
           s.currentEx++
           s.phase = snap.restDur > 0 ? PHASES.REST : PHASES.PREPARE
@@ -149,7 +149,7 @@ export function useWorkout() {
       if (t === 0) {
         beep(1000, 0.18, 'sine', 0.4)
         const exName = snap?.exerciseNames?.[s.currentEx - 1]
-        speak(exName ? `Via! ${exName}` : 'Via!')
+        speak(exName ? `Via! ${exName}. ${snap.exDur} secondi` : `Via! ${snap.exDur} secondi`)
         s.phase = PHASES.EXERCISE
         s.phaseTime = snap.exDur
       }
@@ -164,7 +164,7 @@ export function useWorkout() {
       if (t === 0) {
         beep(1000, 0.18, 'sine', 0.4)
         const exName = snap?.exerciseNames?.[0]
-        speak(exName ? `Via! Serie ${s.currentSet}. ${exName}` : `Via! Serie ${s.currentSet}`)
+        speak(exName ? `Via! Serie ${s.currentSet}. ${exName}. ${snap.exDur} secondi` : `Via! Serie ${s.currentSet}. ${snap.exDur} secondi`)
         s.phase = PHASES.EXERCISE
         s.phaseTime = snap.exDur
       }

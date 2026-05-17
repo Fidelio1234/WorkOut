@@ -1109,3 +1109,39 @@ body {
   color: var(--text);
   font-weight: 500;
 }
+
+
+/* ── NEXT EXERCISE ── */
+.next-exercise-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem;
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+}
+
+.next-exercise-label {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.next-exercise-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.next-exercise-img {
+  width: 100%;
+  max-width: 260px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  opacity: 0.9;
+}

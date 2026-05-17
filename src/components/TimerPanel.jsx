@@ -57,6 +57,21 @@ export default function TimerPanel({
         currentEx={currentEx} currentSet={currentSet} snap={snap}
       />
 
+{(phase === PHASES.REST || phase === PHASES.SERIES_REST) && (
+  <div className="next-exercise-box">
+    <div className="next-exercise-label">PROSSIMO ESERCIZIO</div>
+    <div className="next-exercise-name">{snap?.exerciseNames?.[currentEx - 1]}</div>
+    {snap?.exerciseImages?.[currentEx - 1] && (
+      <img
+        src={snap.exerciseImages[currentEx - 1]}
+        alt={snap.exerciseNames[currentEx - 1]}
+        className="next-exercise-img"
+      />
+    )}
+  </div>
+)}
+
+
       <div className="info-row">
         <div className="info-chip">
           <strong>{currentEx}/{snap?.exercises || '—'}</strong>
