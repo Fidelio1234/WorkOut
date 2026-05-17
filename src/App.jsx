@@ -7,18 +7,21 @@ import TimerPanel from './components/TimerPanel'
 import HistoryPanel from './components/HistoryPanel'
 import WorkoutsPage from './pages/WorkoutsPage'
 import { useWorkout, PHASES } from './hooks/useWorkout'
+import ClientsPage from './pages/ClientsPage'
+import ClientApp from './pages/ClientApp'
 import './styles/app.css'
 
-const TABS = ['workouts', 'config', 'timer', 'history']
+const TABS = ['workouts', 'clients', 'config', 'timer', 'history']
 const TAB_LABELS = {
   workouts: '🏋️ Allenamenti',
+  clients:  '👤 Clienti',
   config:   '⚙ Configura',
   timer:    '▶ Timer',
   history:  '📋 Storico',
 }
-
 export default function App() {
-  const [user, setUser] = useState(undefined) // undefined = loading, null = not logged in
+  const [user, setUser] = useState(undefined) 
+  const [clientUser, setClientUser] = useState(null)
   const [activeTab, setActiveTab] = useState('workouts')
   const [config, setConfig] = useState({
     exDur: 30, restDur: 15, exercises: 4,
@@ -77,7 +80,7 @@ export default function App() {
     }
   }, [user])
 
-  
+
   // Loading Firebase auth state
   if (user === undefined) {
     return (
@@ -92,7 +95,10 @@ export default function App() {
   }
 
   // Not logged in
-  if (!user) return <LoginPage />
+  if (!user) {
+    if (clientUser) return <ClientApp client={clientUser} onLogout={() => setClientUser(null)} />
+    return <LoginPage onClientLogin={(c) => setClientUser(c)} />
+  }
 
 
 
@@ -128,6 +134,9 @@ export default function App() {
         {activeTab === 'workouts' && (
           <WorkoutsPage onWorkoutsChange={setWorkouts} />
         )}
+        {activeTab === 'clients' && (
+  <ClientsPage />
+)}
         {activeTab === 'config' && (
           <ConfigPanel
             config={config} setConfig={setConfig}
