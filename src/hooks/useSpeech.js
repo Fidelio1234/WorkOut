@@ -18,7 +18,7 @@ export function useSpeech() {
       speechSynthesis.cancel()
       const u = new SpeechSynthesisUtterance(text)
       u.lang = 'it-IT'
-      u.rate = 0.9
+      u.rate = 0.7
       u.pitch = 1.05
       u.volume = 1
       if (voiceRef.current) u.voice = voiceRef.current
