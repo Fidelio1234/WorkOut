@@ -162,21 +162,7 @@ export default function ConfigPanel({ config, setConfig, onStart, workouts }) {
       </div>
 
       {/* Music + volume */}
-      <div className="music-card">
-        <label className="music-label">♫ Musica</label>
-        <select className="music-select" value={musicStyle} onChange={e => setMusicStyle(e.target.value)}>
-          <option value="none">Nessuna</option>
-          <option value="ambient">Ambient</option>
-          <option value="energetic">Energetica</option>
-          <option value="focus">Focus</option>
-        </select>
-        <div className="vol-row">
-          <span className="vol-icon">🔈</span>
-          <input type="range" min="0" max="100" value={volume}
-            onChange={e => setVolume(Number(e.target.value))} className="vol-slider" />
-          <span className="vol-val">{volume}%</span>
-        </div>
-      </div>
+   
 
       <div className="summary-row">
         <span className="summary-text">
