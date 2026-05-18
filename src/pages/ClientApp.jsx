@@ -90,7 +90,7 @@ export default function ClientApp({ client, onLogout }) {
         const all = await getWorkouts()
         const assigned = all.filter(w => (client.workoutIds || []).includes(w.id))
         setWorkouts(assigned)
-        setTimeout(() => speak(`Benvenuto ${client.fullName}`), 500)
+        setTimeout(() => speak(`Benvenuto ${client.fullName}`), 2000)
       } catch (e) {}
     }
     load()

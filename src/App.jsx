@@ -33,7 +33,7 @@ export default function App() {
   const [workouts, setWorkouts] = useState([])
   const snapRef = useRef(null)
   const { speak } = useSpeech()
-  
+
   const {
     phase, timeLeft, currentEx, currentSet, totalRem, currentExName, paused,
     start, togglePause, stop,
@@ -89,7 +89,7 @@ export default function App() {
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u)
       if (u) {
-        setTimeout(() => speak('Benvenuto Ivan'), 500)
+        setTimeout(() => speak('Benvenuto Ivan'), 2000)
       }
     })
     return unsub
