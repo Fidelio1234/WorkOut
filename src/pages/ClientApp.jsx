@@ -3,6 +3,7 @@ import { getWorkouts } from '../firebase/db'
 import { useWorkout, PHASES } from '../hooks/useWorkout'
 import TimerPanel from '../components/TimerPanel'
 import { saveClientSession, getClientSessions } from '../firebase/db'
+import { useSpeech } from '../hooks/useSpeech'
 
 export default function ClientApp({ client, onLogout }) {
   const [workouts, setWorkouts] = useState([])
@@ -11,6 +12,7 @@ export default function ClientApp({ client, onLogout }) {
   const [sessions, setSessions] = useState([])
   const [loadingSessions, setLoadingSessions] = useState(false)
   const snapRef = useRef(null)
+  const { speak } = useSpeech()
 
   const { phase, timeLeft, currentEx, currentSet, totalRem, currentExName, paused, start, togglePause, stop } = useWorkout()
 
@@ -80,6 +82,19 @@ export default function ClientApp({ client, onLogout }) {
     const d = ts.toDate ? ts.toDate() : new Date(ts)
     return d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
   }
+
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const all = await getWorkouts()
+        const assigned = all.filter(w => (client.workoutIds || []).includes(w.id))
+        setWorkouts(assigned)
+        setTimeout(() => speak(`Benvenuto ${client.fullName}`), 500)
+      } catch (e) {}
+    }
+    load()
+  }, [client])
 
   return (
     <div className="app">

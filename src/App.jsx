@@ -9,6 +9,7 @@ import WorkoutsPage from './pages/WorkoutsPage'
 import { useWorkout, PHASES } from './hooks/useWorkout'
 import ClientsPage from './pages/ClientsPage'
 import ClientApp from './pages/ClientApp'
+import { useSpeech } from './hooks/useSpeech'
 import './styles/app.css'
 
 const TABS = ['workouts', 'clients', 'config', 'timer', 'history']
@@ -31,7 +32,8 @@ export default function App() {
   const [historyKey, setHistoryKey] = useState(0)
   const [workouts, setWorkouts] = useState([])
   const snapRef = useRef(null)
-
+  const { speak } = useSpeech()
+  
   const {
     phase, timeLeft, currentEx, currentSet, totalRem, currentExName, paused,
     start, togglePause, stop,
@@ -79,6 +81,23 @@ export default function App() {
       document.removeEventListener('visibilitychange', handleVisibility)
     }
   }, [user])
+
+
+
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      setUser(u)
+      if (u) {
+        setTimeout(() => speak('Benvenuto Ivan'), 500)
+      }
+    })
+    return unsub
+  }, [])
+
+
+
+
 
 
   // Loading Firebase auth state
