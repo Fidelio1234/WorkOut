@@ -161,6 +161,25 @@ function WorkoutForm({ initial, onSave, onCancel }) {
   )
 }
 
+
+
+function ConfirmModal({ message, onConfirm, onCancel }) {
+  return (
+    <div className="modal-overlay">
+      <div className="modal-box">
+        <div className="modal-message">{message}</div>
+        <div className="modal-actions">
+          <button className="ctrl-btn" onClick={onCancel}>Annulla</button>
+          <button className="ctrl-btn danger" onClick={onConfirm}>Elimina</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+
+
 export default function WorkoutsPage({ onWorkoutsChange }) {
   const [workouts, setWorkouts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -204,10 +223,16 @@ export default function WorkoutsPage({ onWorkoutsChange }) {
     } catch (e) { alert('Errore modifica. Controlla Firebase.') }
   }
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('Eliminare questo allenamento?')) return
-    try { await deleteWorkout(id); await reload() } catch (e) {}
+  const [confirmDelete, setConfirmDelete] = useState(null)
+
+  const handleDelete = async () => {
+    try {
+      await deleteWorkout(confirmDelete.id)
+      setConfirmDelete(null)
+      await reload()
+    } catch (e) {}
   }
+
 
   const toForm = (w) => ({
     name: w.name,
@@ -266,11 +291,18 @@ export default function WorkoutsPage({ onWorkoutsChange }) {
             </div>
             <div className="workout-item-actions">
               <button className="icon-btn" onClick={() => { setEditing(w); setView('edit') }}>✏️</button>
-              <button className="icon-btn danger" onClick={() => handleDelete(w.id)}>🗑</button>
+             <button className="icon-btn danger" onClick={() => setConfirmDelete({ id: w.id, label: w.name })}>🗑</button>
             </div>
           </div>
         ))}
       </div>
+      {confirmDelete && (
+  <ConfirmModal
+    message={`Eliminare "${confirmDelete.label}"?`}
+    onConfirm={handleDelete}
+    onCancel={() => setConfirmDelete(null)}
+  />
+)}
     </div>
   )
 }

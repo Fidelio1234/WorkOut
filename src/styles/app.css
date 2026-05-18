@@ -111,8 +111,8 @@ body {
 }
 
 .config-label {
-  font-size: 12px;
-  color: var(--text2);
+  font-size: 14px;
+  color: var(--green);
   margin-bottom: 10px;
   letter-spacing: 0.02em;
 }
@@ -151,8 +151,8 @@ body {
 }
 
 .num-unit {
-  font-size: 11px;
-  color: var(--text3);
+  font-size: 12px;
+  color: var(--green);
   margin-top: 4px;
 }
 
@@ -229,8 +229,8 @@ body {
 }
 
 .summary-text {
-  font-size: 12px;
-  color: var(--text3);
+  font-size: 14px;
+  color: var(--text);
   font-family: 'DM Mono', monospace;
 }
 
@@ -275,8 +275,8 @@ body {
   border: 0.5px dashed var(--border2);
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--text2);
-  font-size: 13px;
+  color: var(--green);
+  font-size: 15px;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   margin-bottom: 8px;
@@ -506,15 +506,15 @@ body {
 }
 
 .workout-item-meta {
-  font-size: 12px;
-  color: var(--text2);
+  font-size: 16px;
+  color: var(--text);
   font-family: 'DM Mono', monospace;
   margin-bottom: 4px;
 }
 
 .workout-item-exs {
-  font-size: 12px;
-  color: var(--text3);
+  font-size: 14px;
+  color: var(--green);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -572,7 +572,7 @@ body {
 
 .form-label {
   font-size: 12px;
-  color: var(--text2);
+  color: var(--text);
   letter-spacing: 0.04em;
 }
 
@@ -776,8 +776,8 @@ body {
   background: none;
   border: 0.5px solid var(--border2);
   border-radius: var(--radius-sm);
-  color: var(--text3);
-  font-size: 12px;
+  color: var(--red);
+  font-size: 16px;
   padding: 5px 10px;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
@@ -1144,4 +1144,41 @@ body {
   object-fit: cover;
   border-radius: var(--radius-sm);
   opacity: 0.9;
+}
+
+
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.modal-box {
+  background: var(--bg2);
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-message {
+  font-size: 15px;
+  color: var(--text);
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
 }

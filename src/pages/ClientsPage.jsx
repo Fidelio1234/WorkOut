@@ -215,7 +215,7 @@ export default function ClientsPage() {
               <div className="workout-item-exs">
                 {(c.workoutIds || []).length} allenamenti assegnati
               </div>
-              <div className="workout-item-meta credentials-mono" style={{ color: 'var(--text3)', fontSize: 11 }}>
+              <div className="workout-item-meta credentials-mono" style={{ color: 'var(--text)', fontSize: 14 }}>
   🔑 {c.password || '—'}
 </div>
             </div>
